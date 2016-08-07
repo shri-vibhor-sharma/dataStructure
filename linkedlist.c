@@ -26,6 +26,37 @@ void insertAtBeganing(int datas, struct node **head_ref){
    //make new head point to new node
    (*head_ref)= new_node;
 }
+void insertAfter(int datum,struct node *node_ref){
+    if (node_ref==NULL){
+        printf("node cannot be inserted after the null node ");
+    }
+    printf("adding new node after- %d",node_ref->data);
+    //create a new node
+    struct node *new_node= (struct node*)malloc(sizeof(struct node));
+    //add the data to new node
+    new_node->data=datum;
+    //point the new node to next node pointed by earlier node
+    new_node->next=node_ref->next;
+    //point the next of old node to newly inserted node
+    node_ref->next=new_node;
+}
+
+void insertAtEnd(int datum, struct node **startNode){
+    //sdf
+    struct node *last= *startNode;
+     struct node *new_node= (struct node*)malloc(sizeof(struct node));
+     new_node->data=datum;
+     if(startNode==NULL){
+         printf("empty list");
+         *startNode=new_node;
+         return;
+     }
+     while(last->next != NULL){
+         last= last->next;
+     }
+     last->next=new_node;
+     return;
+}
 
 //creating a sample linked list with 3 nodes
 int main(){
@@ -46,7 +77,10 @@ int main(){
     third->next=NULL;
     
    // printList(head);
-    insertAtBeganing(4,&head);
+    insertAtEnd(99,&head);
     printList(head);
+    printf("\n");
+   // insertAfter(5,head);
+    //printList(head);
     return 0;
 }
